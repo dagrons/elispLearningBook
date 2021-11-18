@@ -1,0 +1,19 @@
+* 一个简单的二分
+
+#+BEGIN_SRC emacs-lisp
+  (setq a [0 1 2 3 5 5 6 7 8 8 9 9 9 10 12 16 17])
+
+  (defun bsearch (a l r target)
+    (let ((mid (/ (+ l r) 2)))
+      (cond ((>= l r) l)
+	    ((<= target (aref a l)) (bsearch a l mid target))
+	    (t (bsearch a (+ 1 mid) r target)))))
+
+  (bsearch a 0 (- (length a) 1) 8)
+#+END_SRC
+
+#+RESULTS:
+: 9
+
+
+
