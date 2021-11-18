@@ -83,3 +83,104 @@
 
 #+RESULTS:
 : 8
+
+
+* 见识一下org-babel的神奇魔法
+
+其实org-babel + shell在一定程度上和ansible比较类似, 但这个更偏向于文档
+
+有的header只针对部分语言有效, 例如:stdin好像只对shell有效
+
+  #+NAME: vallian-table
+| 1 |
+| 2 |
+| 3 |
+| 4 |
+| 5 |
+
+
+#+NAME: my-table
+| A | 1 |
+| B | 2 |
+| C | 3 |
+
+
+#+NAME: literal-example
+#+BEGIN_EXAMPLE
+A literal example
+on two lines
+#+END_EXAMPLE
+
+#+BEGIN_SRC emacs-lisp  :var lst=vallian-table[2:4] :exports both
+(print lst)
+#+END_SRC
+
+#+RESULTS:
+| 3 |
+| 4 |
+| 5 |
+
+#+NAME: where-am-i
+#+BEGIN_SRC python :results output :dir /tmp :exports both
+import os
+print (os.getcwd())
+#+END_SRC
+
+#+RESULTS: where-am-i
+: /tmp
+
+
+#+BEGIN_SRC C++ 
+  #include <iostream>
+
+  using namespace std;
+
+  int main() {
+	cout << "hello" << endl;
+  }
+
+#+END_SRC
+
+#+RESULTS:
+: hello
+
+
+#+BEGIN_SRC python :var lt=literal-example i
+  return lt.split("\n")
+#+END_SRC
+
+#+RESULTS:
+| A literal example | \ton two lines | \t |
+
+
+#+BEGIN_SRC python :results value raw
+return [(1, 2), (2, 3)]
+#+END_SRC
+
+#+RESULTS:
+[(1, 2), (2, 3)]
+
+#+NAME: my-dict
+#+BEGIN_SRC python :results value raw
+  return {'a':1, 'b':2}
+#+END_SRC
+
+#+RESULTS:
+{'a': 1, 'b': 2}
+
+#+BEGIN_SRC python :var dct=my-dict :results value raw
+return dct
+#+END_SRC
+
+#+RESULTS:
+{'a': 1, 'b': 2}
+{'a': 1, 'b': 2}
+{'a': 1, 'b': 2}
+
+#+BEGIN_SRC shell :stdin literal-example :results output
+v=$(cat)
+echo $v
+#+END_SRC
+
+#+RESULTS:
+: A literal example on two lines
