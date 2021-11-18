@@ -4,16 +4,82 @@
   (setq a [0 1 2 3 5 5 6 7 8 8 9 9 9 10 12 16 17])
 
   (defun bsearch (a l r target)
-    (let ((mid (/ (+ l r) 2)))
-      (cond ((>= l r) l)
-	    ((<= target (aref a l)) (bsearch a l mid target))
-	    (t (bsearch a (+ 1 mid) r target)))))
+	(let ((mid (/ (+ l r) 2)))
+	  (cond ((>= l r) l)
+		((<= target (aref a mid)) (bsearch a l mid target))
+		(t (bsearch a (+ 1 mid) r target)))))
 
   (bsearch a 0 (- (length a) 1) 8)
 #+END_SRC
 
 #+RESULTS:
-: 9
+: 8
 
 
+#+BEGIN_SRC python :results output
+  a = [0, 1, 2, 3, 5, 5, 6, 7, 8, 8, 9, 9, 9, 10, 12, 16, 17]
 
+
+  def bsearch(a, l, r, target):
+	  if l >= r:
+		  return l
+	  mid = (l + r) // 2
+	  if target <= mid:
+		  return bsearch(a, l, mid, target)
+	  else:
+		  return bsearch(a, mid+1, r, target)
+
+
+  print(bsearch(a, 0, len(a)-1, 8))
+#+END_SRC
+
+#+RESULTS:
+: 8
+
+#+BEGIN_SRC go
+  package main
+  import ("fmt")
+
+  func main() {
+	  a := []int{0, 1, 2, 3, 5, 5, 6, 7, 8, 8, 9, 9, 9, 10, 12, 16, 17}
+	  fmt.Println(bsearch(a, 0, len(a) - 1, 8))
+  }
+
+
+  func bsearch(a []int, l, r int,  target int) int {
+	  if l >= r {
+		  return l
+	  }
+	  mid := (l + r) / 2
+	  if target <= mid {
+		  return bsearch(a, l , mid, target)
+	  } else {
+		  return bsearch(a, mid+1, r, target)
+	  }
+  }
+
+#+END_SRC
+
+#+RESULTS:
+: 8
+
+#+BEGIN_SRC C++
+  #include <iostream>
+
+  using namespace std;
+
+  int bsearch(int a[], int l, int r, int target) {
+		if (l >= r) return l;
+		int mid = l+r >> 1;
+		if (target <= mid) return bsearch(a, l, mid, target);
+		else return bsearch(a, mid+1, r, target);
+  }
+
+  int main() {
+		int a[] = {0, 1, 2, 3, 5, 5, 6, 7, 8, 8, 9, 9, 9, 10, 12, 16, 17};
+		cout <<  bsearch(a, 0, sizeof(a)/sizeof(a[0]) - 1, 8) << endl;
+  }
+#+END_SRC
+
+#+RESULTS:
+: 8
