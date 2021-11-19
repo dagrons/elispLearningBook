@@ -1,3 +1,12 @@
+#+SETUPFILE: ~/org-themes/src/solarized_dark/solarized_dark.theme
+
+* 为什么要学elisp
+
+  希望将emacs作为终生使用的编辑器
+
+  希望能写出有意义的东西回馈社区
+
+
 * 一个简单的二分
 
 #+BEGIN_SRC emacs-lisp
@@ -106,7 +115,7 @@
 
 
 #+NAME: literal-example
-#+BEGIN_EXAMPLE
+#+BEGIN_EXAMPLE 
 A literal example
 on two lines
 #+END_EXAMPLE
@@ -130,7 +139,7 @@ print (os.getcwd())
 : /tmp
 
 
-#+BEGIN_SRC C++ 
+#+BEGIN_SRC C++  :exports both
   #include <iostream>
 
   using namespace std;
@@ -145,7 +154,7 @@ print (os.getcwd())
 : hello
 
 
-#+BEGIN_SRC python :var lt=literal-example i
+#+BEGIN_SRC python :var lt=literal-example :exports both
   return lt.split("\n")
 #+END_SRC
 
@@ -153,7 +162,7 @@ print (os.getcwd())
 | A literal example | \ton two lines | \t |
 
 
-#+BEGIN_SRC python :results value raw
+#+BEGIN_SRC python :results value raw :exports both
 return [(1, 2), (2, 3)]
 #+END_SRC
 
@@ -161,14 +170,14 @@ return [(1, 2), (2, 3)]
 [(1, 2), (2, 3)]
 
 #+NAME: my-dict
-#+BEGIN_SRC python :results value raw
+#+BEGIN_SRC python :results value raw :exports both
   return {'a':1, 'b':2}
 #+END_SRC
 
 #+RESULTS:
 {'a': 1, 'b': 2}
 
-#+BEGIN_SRC python :var dct=my-dict :results value raw
+#+BEGIN_SRC python :var dct=my-dict :results value raw :exports both
 return dct
 #+END_SRC
 
@@ -177,10 +186,21 @@ return dct
 {'a': 1, 'b': 2}
 {'a': 1, 'b': 2}
 
-#+BEGIN_SRC shell :stdin literal-example :results output
+#+BEGIN_SRC shell :stdin literal-example :results output :exports both
 v=$(cat)
 echo $v
 #+END_SRC
 
 #+RESULTS:
 : A literal example on two lines
+
+#+BEGIN_SRC dot :file imgs/test-dot.svg :exports both
+  digraph G {
+	  a -> b
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:imgs/test-dot.png]]
+
+
