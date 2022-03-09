@@ -6,7 +6,7 @@
 
   希望能写出有意义的东西回馈社区
 
-
+  
 * 一个简单的二分
 
 #+BEGIN_SRC emacs-lisp
@@ -70,7 +70,6 @@
 #+END_SRC
 
 #+RESULTS:
-: 8
 
 #+BEGIN_SRC C++
   #include <iostream>
@@ -120,87 +119,298 @@ A literal example
 on two lines
 #+END_EXAMPLE
 
-#+BEGIN_SRC emacs-lisp  :var lst=vallian-table[2:4] :exports both
-(print lst)
-#+END_SRC
 
-#+RESULTS:
-| 3 |
-| 4 |
-| 5 |
+** 用ob-lisp学习emacs-lisp
+   #+BEGIN_SRC emacs-lisp  :var lst=vallian-table[2:4] :exports both
+	 (print lst)
+   #+END_SRC
 
-#+NAME: where-am-i
-#+BEGIN_SRC python :results output :dir /tmp :exports both
-import os
-print (os.getcwd())
-#+END_SRC
-
-#+RESULTS: where-am-i
-: /tmp
+   #+RESULTS:
+   | 3 |
+   | 4 |
+   | 5 |
 
 
-#+BEGIN_SRC C++  :exports both
-  #include <iostream>
+** 用ob-C刷题
+   #+BEGIN_SRC C++  :exports both 
+	 #include <iostream>
 
-  using namespace std;
+	 using namespace std;
 
-  int main() {
-	cout << "hello" << endl;
-  }
+	 int main() {
+		   cout << "hello" << endl;
+	 }
 
-#+END_SRC
+   #+END_SRC
 
-#+RESULTS:
-: hello
-
-
-#+BEGIN_SRC python :var lt=literal-example :exports both
-  return lt.split("\n")
-#+END_SRC
-
-#+RESULTS:
-| A literal example | \ton two lines | \t |
+   #+RESULTS:
+   hello
 
 
-#+BEGIN_SRC python :results value raw :exports both
-return [(1, 2), (2, 3)]
-#+END_SRC
+** 用ob-python进行python编写和测试
+   
+   #+BEGIN_SRC python :dir /tmp :results output
+	 import os	 
+	 print(os.getcwd())
+   #+END_SRC
 
-#+RESULTS:
-[(1, 2), (2, 3)]
+   #+RESULTS:
+   : /tmp
+   
+   #+BEGIN_SRC python :var lt=literal-example :exports both
+	 return lt.split("\n")
+   #+END_SRC
 
-#+NAME: my-dict
-#+BEGIN_SRC python :results value raw :exports both
-  return {'a':1, 'b':2}
-#+END_SRC
-
-#+RESULTS:
-{'a': 1, 'b': 2}
-
-#+BEGIN_SRC python :var dct=my-dict :results value raw :exports both
-return dct
-#+END_SRC
-
-#+RESULTS:
-{'a': 1, 'b': 2}
-{'a': 1, 'b': 2}
-{'a': 1, 'b': 2}
-
-#+BEGIN_SRC shell :stdin literal-example :results output :exports both
-v=$(cat)
-echo $v
-#+END_SRC
-
-#+RESULTS:
-: A literal example on two lines
-
-#+BEGIN_SRC dot :file imgs/test-dot.svg :exports both
-  digraph G {
-	  a -> b
-  }
-#+END_SRC
-
-#+RESULTS:
-[[file:imgs/test-dot.png]]
+   #+RESULTS:
+   | A literal example | \ton two lines  | \t |
 
 
+   #+BEGIN_SRC python :results value raw :exports both
+	 return [(1, 2), (2, 3)]
+   #+END_SRC
+
+   #+RESULTS:
+   [(1, 2), (2, 3)]
+
+   #+NAME: my-dict
+   #+BEGIN_SRC python :results value raw :exports both
+	 return {'a':1, 'b':2}
+   #+END_SRC
+
+   #+RESULTS:
+   {'a': 1, 'b': 2}
+
+   #+BEGIN_SRC python :var dct=my-dict :results value raw :exports both
+	 return dct
+   #+END_SRC
+
+   #+RESULTS:
+   {'a': 1, 'b': 2}
+   {'a': 1, 'b': 2}
+   {'a': 1, 'b': 2}
+
+   
+** 用ob-shell进行脚本编写与测试
+   #+BEGIN_SRC shell :stdin literal-example :results output :exports both
+	 v=$(cat)
+	 echo $v
+   #+END_SRC
+
+   #+RESULTS:
+   : A literal example on two lines
+
+
+** 用ob-graphviz画图
+   #+BEGIN_SRC dot :file imgs/test-dot.svg :exports code
+	 digraph G {
+		 a -> b
+	 }
+   #+END_SRC
+
+   #+RESULTS:
+   [[file:imgs/test-dot.png]]
+
+
+** 用ob-http进行接口测试
+   
+   下面是一个用ox-http登录校园网的例子
+   #+BEGIN_SRC http
+	 POST http://10.3.8.211/login
+	 
+	 user=2020110966&pass=Daxiahyh1
+   #+END_SRC            
+
+   #+RESULTS:
+   #+begin_example
+   HTTP/1.1 200 OK
+   Content-Type: text/html; charset=UTF-8
+   Set-Cookie: SessionId=487dce62f278ab5d; Path=/; HttpOnly
+   Date: Fri, 17 Dec 2021 10:43:58 GMT
+   Transfer-Encoding: chunked
+
+   <!DOCTYPE html>
+   <html lang="zh-cn">
+   <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+   <link rel="stylesheet" href="./assets/normalize.css" />
+   <link rel="stylesheet" href="./assets/login.css" />
+   <script src="./assets/jquery.min.js"></script>
+   <title>网络认证登录
+   </title>
+   </head>
+   <body>
+   <div class="background">
+   </div>
+   <div style="text-align:center">
+   <div class="container">
+	   <div class="row header">
+		   <div class="login-panel__title">
+			   网络认证登录
+
+		   </div>
+	   </div>
+	   <div class="row">
+		   <div class="wrap">
+			   <div class="notice-panel">
+				   <div class="notice-box">
+					   <div class="notice-title">
+						   通知
+					   </div>
+					   <div class="notice-line"></div>
+					   <div class="notice-content">
+						   <p>欢迎使用北京邮电大学校园网。账号为学号或工作证号。初始密码为身份证号码后6位(结尾为X请改为0)，不可直接登录校园网。请使用初始密码登录<a href="https://netaccount.bupt.edu.cn">自服务系统</a>修改密码后使用。 如有问题请咨询010-62283039</p>
+   <p style="color: red">自2021年7月12日10时起，密码仍为初始密码的账号将不能使用校园网账号。请修改后使用！</p>
+					   </div>
+				   </div>
+			   </div><div class="login-panel">
+				   <div class="login-success" style="display: none;">
+					   <h3 class="center title">登录成功</h3>
+					   <div class="notice-content">
+							   <div>您已经登录成功</div>
+							   <div>You have successfully logged in</div>
+							   <div>在完成工作后，请别忘记注销</div>
+							   <div>Please remember to logout</div>
+					   </div>
+
+					   <div class="login-about">
+						   <a href='http://netaccount.bupt.edu.cn/login'>进入自服务系统</a>
+					   </div>
+
+					   <button type="submit" class="el-button ex-width el-button--primary" style="margin-bottom:20px;" onclick="logout()">
+						   <span>登出</span>
+					   </button>
+				   </div>
+				   <div class="login-process" style="min-height: 400px">
+					   <div class="login-panel__title">
+						   网络认证登录
+					   </div>
+					   <h3 class="center title">正在拨号，请等待...</h3>
+					   <div style="text-align:center;margin-top:60px;margin-bottom:40px">
+						   <img src="/assets/loading.gif" border="0"/>
+					   </div>
+				   </div>
+
+
+			   </div>
+
+			   <div class="mobile-notice-panel">
+				   <div class="notice-content">
+					   <p>欢迎使用北京邮电大学校园网。账号为学号或工作证号。初始密码为身份证号码后6位(结尾为X请改为0)，不可直接登录校园网。请使用初始密码登录<a href="https://netaccount.bupt.edu.cn">自服务系统</a>修改密码后使用。 如有问题请咨询010-62283039</p>
+   <p style="color: red">自2021年7月12日10时起，密码仍为初始密码的账号将不能使用校园网账号。请修改后使用！</p>
+				   </div>
+			   </div>
+		   </div>
+	   </div>
+	   <div class="footer">
+	   </div>
+   </div>
+   </div>
+   <script>
+   var sec;
+   var intervalId = 0;
+   $(function(){
+	   $('.effect').on('blur',function(){
+		   if($(this).val() != ''){
+			   $(this).siblings('label').addClass('trans');
+		   }else{
+			   $(this).siblings('label').removeClass('trans');
+		   }
+	   })
+	   searchCode()
+	   var time = 0
+	   function searchCode () {
+		   $.get('/dial', function (res) {
+			   if (res.code === 0) {
+				   $('.login-process').css('display', 'none')
+				   $('.login-success').css('display', 'block')
+			   } else {
+				   if (time < 30) {
+					   setTimeout(function () {
+						   time += 2
+						   searchCode()
+					   }, 2000)
+				   } else {
+					   alert('拨号失败！请联系运营商。\n错误信息:' + res.msg)
+					   window.location.href = '/logout'
+				   }
+			   }
+		   })
+	   }
+   });
+   function login() {
+		   var loginForm = document.forms[0];
+		   var user = loginForm.user.value;
+		   var password = loginForm.pass.value;
+		   if($('#uam').prop('checked')){
+				   $('#fakeUam').attr('disabled', true)
+		   }else {
+				   $('#fakeUam').attr('disabled', false)
+		   }
+		   if (user == "" || user == "账号 Account") {
+				   alert("请输入用户名");
+				   return false;
+		   }
+		   else if (password == "" || password == undefined) {
+				   alert("请输入密码");
+				   return false;
+		   }
+		   return true;
+   }
+   function logout() {
+		   if (window.confirm("确定注销? Logout Confirmed?")) {
+				   window.location = "./logout";
+		   }
+   }
+   </script>
+   <!--[if lte IE 7]> <style> .login-panel{ float:left; } .notice-panel{ float:left; } </style> <![endif]-->
+   </body>
+   </html>
+   #+end_example
+
+
+
+* org-mode中的Link
+  
+  #+NAME: img-link
+  [[./imgs/test-dot.png]]
+  
+  [[img-link][点我到上面的图]]
+
+  [[file+emacs:/home/dell/acwingLearningBook/index.org::#binary-tree][点我到其他文件]]
+
+  [[https://github.com][点我打开网页]]
+      
+
+
+* 用bibtex-mode进行文献管理
+  
+  bibtex-mode是emacs内置的模式
+
+  常用命令及快捷键如下
+
+  | C-c C-b | insert a new bib entry     |
+  | C-j     | jump to next field         |
+  | C-J     | jump to prev field         |
+  | C-c C-c | commit change, clean entry |
+  | C-c C-q | format entry               |
+
+  再配合helm-bibtex对文献进行快速查询，添加pdf，添加笔记等
+
+
+
+  
+
+* 用pandoc进行文档转换
+
+  #+BEGIN_SRC shell
+  pandoc -f html -t odt -o target.odt source.html
+  #+END_SRC 
+
+
+* Puzzle
+
+  1. citeproc-org 如何使用多个bib
+  2. CSL_STYLE与odt导出的冲突问题
+
+	 
